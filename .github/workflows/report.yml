@@ -1,8 +1,6 @@
-name: AWS Inspector Daily Excel Report
+name: AWS Inspector Excel Report (Manual Run)
 
 on:
-schedule:
-- cron: '30 1 * * *'   # Runs daily at 07:00 AM IST
 workflow_dispatch:
 
 permissions:

@@ -9,30 +9,30 @@ jobs:
     permissions:
      id-token: write
      contents: read
-     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+    steps:
+     - name: Checkout Repository
+       uses: actions/checkout@v4
 
-      - name: Configure AWS Credentials (OIDC)
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
+     - name: Configure AWS Credentials (OIDC)
+       uses: aws-actions/configure-aws-credentials@v4
+       with:
          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
          aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
+     - name: Set up Python
+       uses: actions/setup-python@v5
+       with:
          python-version: '3.11'
 
-      - name: Install Python packages
-        run: |
-          pip install -r requirements.txt
+     - name: Install Python packages
+       run: |
+         pip install -r requirements.txt
 
-      - name: Generate Inspector Report
-        run: python inspector_report.py
+     - name: Generate Inspector Report
+       run: python inspector_report.py
 
-      - name: Upload Excel Report
-        uses: actions/upload-artifact@v4
-        with:
+     - name: Upload Excel Report
+       uses: actions/upload-artifact@v4
+       with:
          name: aws-inspector-excel-report
          path: "*.xlsx"
